@@ -15,5 +15,6 @@ BLUE = (0, 0, 255)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GRAY = (125, 125, 125)
+ORANGE = (255, 165, 48)
 
 DIRECTION = ['left', 'right', 'top', 'bottom']

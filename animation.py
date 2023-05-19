@@ -5,10 +5,12 @@ import constants
 from routing_map import Routing
 
 def animation(Routing:Routing):
+
     while True:
-        Routing.random_agent()
+        # Routing.Dijkstra_agent()
+        Routing.greedy_agent()
         cv2.imshow('frame', draw_map(Routing.Map, (Routing.X, Routing.Y)))
-        cv2.waitKey(200)
+        cv2.waitKey(100)
         
     
 def draw_map(map:np.ndarray, current_position:tuple):
@@ -17,17 +19,17 @@ def draw_map(map:np.ndarray, current_position:tuple):
         for x in range(map.shape[1]):
             match int(map[y, x]):
                 case constants.BIN:
-                    colored_map[(y*BLOCK_WIDTH): (y*BLOCK_WIDTH)+BLOCK_WIDTH, (x* BLOCK_WIDTH): (x* BLOCK_WIDTH)+BLOCK_WIDTH] = constants.BLACK
+                    colored_map[(y*BLOCK_WIDTH): (y*BLOCK_WIDTH)+BLOCK_WIDTH, (x* BLOCK_WIDTH): (x* BLOCK_WIDTH)+BLOCK_WIDTH] = tuple(x/255 for x in constants.BLACK)
                 case constants.ROAD:
-                    colored_map[(y*BLOCK_WIDTH): (y*BLOCK_WIDTH)+BLOCK_WIDTH, (x* BLOCK_WIDTH): (x* BLOCK_WIDTH)+BLOCK_WIDTH] = constants.WHITE
+                    colored_map[(y*BLOCK_WIDTH): (y*BLOCK_WIDTH)+BLOCK_WIDTH, (x* BLOCK_WIDTH): (x* BLOCK_WIDTH)+BLOCK_WIDTH] = tuple(x/255 for x in constants.WHITE)
                 case constants.START_POINT:
-                    colored_map[(y*BLOCK_WIDTH): (y*BLOCK_WIDTH)+BLOCK_WIDTH, (x* BLOCK_WIDTH): (x* BLOCK_WIDTH)+BLOCK_WIDTH] = constants.RED
+                    colored_map[(y*BLOCK_WIDTH): (y*BLOCK_WIDTH)+BLOCK_WIDTH, (x* BLOCK_WIDTH): (x* BLOCK_WIDTH)+BLOCK_WIDTH] = tuple(x/255 for x in constants.RED)
                 case constants.PICKUP_ITEM:
-                    colored_map[(y*BLOCK_WIDTH): (y*BLOCK_WIDTH)+BLOCK_WIDTH, (x* BLOCK_WIDTH): (x* BLOCK_WIDTH)+BLOCK_WIDTH] = constants.BLUE
+                    colored_map[(y*BLOCK_WIDTH): (y*BLOCK_WIDTH)+BLOCK_WIDTH, (x* BLOCK_WIDTH): (x* BLOCK_WIDTH)+BLOCK_WIDTH] = tuple(x/255 for x in constants.BLUE)
                 case constants.MARKED_ROAD:
-                    colored_map[(y*BLOCK_WIDTH): (y*BLOCK_WIDTH)+BLOCK_WIDTH, (x* BLOCK_WIDTH): (x* BLOCK_WIDTH)+BLOCK_WIDTH] = constants.GRAY
+                    colored_map[(y*BLOCK_WIDTH): (y*BLOCK_WIDTH)+BLOCK_WIDTH, (x* BLOCK_WIDTH): (x* BLOCK_WIDTH)+BLOCK_WIDTH] = tuple(x/255 for x in constants.ORANGE)
                 case _:
-                    colored_map[(y*BLOCK_WIDTH): (y*BLOCK_WIDTH)+BLOCK_WIDTH, (x* BLOCK_WIDTH): (x* BLOCK_WIDTH)+BLOCK_WIDTH] = constants.GREEN
+                    colored_map[(y*BLOCK_WIDTH): (y*BLOCK_WIDTH)+BLOCK_WIDTH, (x* BLOCK_WIDTH): (x* BLOCK_WIDTH)+BLOCK_WIDTH] = tuple(x/255 for x in constants.GREEN)
 
     for y in range(map.shape[0]):
         for x in range(map.shape[1]):
