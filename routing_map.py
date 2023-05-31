@@ -154,65 +154,14 @@ class Routing:
         self.X = next_move[1]
     
     def S_routing_agent(self):
-        # go random
-        left, right, top, bottom = self.get_surrounding_blocks()
-        mask = [False if (left in (None, BIN, PICKUP_ITEM)) else True, 
-                False if (right in (None, BIN, PICKUP_ITEM)) else True,
-                False if (top in (None, BIN, PICKUP_ITEM)) else True,
-                False if (bottom in (None, BIN, PICKUP_ITEM)) else True]
         
-        if mask[0] == True:
-            direction = 'left'
-        
-        if mask[0] == True:
-            direction = 'left'
-        
-        if mask[0] == True:
-            direction = 'left'
-        
-
+        pass
         # direction = random.choice(np.array(constants.DIRECTION)[mask])
-        self.go(direction)
-
-    def Dijkstra_agent(self):
-        start = (self.Y, self.X)
-        distance, q = bfs(self.Map, start)
-        if distance != -1:
-            print(f"Distance to the nearest item: {distance}")
-            print(f"queue : {q}")
-        else:
-            print("No items found")
+        # self.go(direction)
 
 def euclidean_distance(point1, point2):
     distance = math.sqrt((point1[0] - point2[0])**2 + (point1[1] - point2[1])**2)
     return distance 
-
-def dijkstra(grid, start):
-    rows = len(grid)
-    cols = len(grid[0])
-    
-    distances = [[float('inf')] * cols for _ in range(rows)]
-    distances[start[0]][start[1]] = 0
-    
-    queue = [(0, start)]
-    
-    while queue:
-        current_distance, (i, j) = heapq.heappop(queue)
-        
-        if current_distance > distances[i][j]:
-            continue
-        
-        neighbors = get_valid_neighbors(grid, i, j)
-        
-        for neighbor in neighbors:
-            ni, nj = neighbor
-            distance = current_distance + 1  # Assuming all path distances are 1
-            
-            if distance < distances[ni][nj]:
-                distances[ni][nj] = distance
-                heapq.heappush(queue, (distance, (ni, nj)))
-    
-    return distances
 
 def get_valid_neighbors(grid, i, j):
     rows = len(grid)
